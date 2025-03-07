@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>About - Meraj Ahmad</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaf4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #0077b6;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        nav {
+            background-color: #0096c7;
+            text-align: center;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #ffcc00;
+        }
+        section {
+            background-color: white;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        section:hover {
+            transform: translateY(-5px);
+        }
+        h1, h2 {
+            color: #0077b6;
+        }
+        img.profile-photo {
+            display: block;
+            margin: 0 auto;
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 4px solid #0077b6;
+        }
+        .timeline {
+            position: relative;
+            padding: 20px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 20px;
+            width: 4px;
+            height: 100%;
+            background-color: #0077b6;
+        }
+        .timeline-item {
+            position: relative;
+            padding: 10px 40px;
+            margin: 10px 0;
+            background-color: #f1f7f9;
+            border-radius: 5px;
+        }
+        .timeline-item::before {
+            content: '•';
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            font-size: 20px;
+            color: #0077b6;
+        }
+        footer {
+            background-color: #0077b6;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>About Me - Meraj Ahmad</h1>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="skills.html">Skills</a>
+    <a href="experience.html">Experience</a>
+    <a href="projects.html">Projects</a>
+    <a href="education.html">Education</a>
+    <a href="certifications.html">Certifications</a>
+    <a href="languages.html">Languages</a>
+    <a href="contact.html">Contact</a>
+    <a href="resume.html">Resume</a>
+</nav>
+
+<section>
+    <h2>Who is Meraj Ahmad?</h2>
+    <img src="images/profile_photo.jpg" alt="Meraj Ahmad" class="profile-photo">
+    <p>Hello! I am a proactive and detail-oriented Data Analyst with expertise in Excel, Power BI, SQL, and Python. My passion is to transform raw data into meaningful insights that empower decision-making. I thrive in optimizing processes and automating reports, allowing businesses to act faster and smarter.</p>
+</section>
+
+<section class="timeline">
+    <h2>Career Journey</h2>
+    <div class="timeline-item">
+        <h3>Senior MIS Executive - Teleperformance (2023-2024)</h3>
+        <p>Generated analytical reports for SBI Credit Card operations, enhancing operational efficiency and customer satisfaction.</p>
+    </div>
+    <div class="timeline-item">
+        <h3>Retail & Cyber Cafe Manager (2021-2023)</h3>
+        <p>Managed sales, operations, and data analysis, improving billing processes and customer experience.</p>
+    </div>
+    <div class="timeline-item">
+        <h3>Bachelor of Arts - ANH Smarak Mahavidhyalaya (Graduated)</h3>
+        <p>Completed my degree while developing a passion for data analytics and process optimization.</p>
+    </div>
+</section>
+
+<section>
+    <h2>Personal Statement</h2>
+    <p>“Data tells a story — and I love being the storyteller. Whether it's Excel dashboards or Python scripts, my goal is always to extract the truth from data and present it in ways that anyone can understand.”</p>
+</section>
+
+<footer>
+    <p>© 2025 Meraj Ahmad | Data Analyst Portfolio | <a href="https://www.linkedin.com/in/merajahmad786" target="_blank">LinkedIn</a></p>
+</footer>
+
+</body>
+</html>

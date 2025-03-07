@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Education - Meraj Ahmad</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #023e8a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        nav {
+            background-color: #0077b6;
+            text-align: center;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #ff6f61;
+        }
+        section {
+            background-color: white;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        section:hover {
+            transform: translateY(-5px);
+        }
+        h1, h2 {
+            color: #0077b6;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin-top: 20px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #0077b6;
+            animation: growLine 2s ease forwards;
+        }
+        @keyframes growLine {
+            from { height: 0; }
+            to { height: 100%; }
+        }
+        .timeline-item {
+            position: relative;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #e3f2fd;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+        .timeline-item:hover {
+            background-color: #caf0f8;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -35px;
+            width: 15px;
+            height: 15px;
+            background-color: #0077b6;
+            border: 3px solid white;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        footer {
+            background-color: #023e8a;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Education - Meraj Ahmad</h1>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="skills.html">Skills</a>
+    <a href="experience.html">Experience</a>
+    <a href="projects.html">Projects</a>
+    <a href="education.html">Education</a>
+    <a href="certifications.html">Certifications</a>
+    <a href="languages.html">Languages</a>
+    <a href="contact.html">Contact</a>
+    <a href="resume.html">Resume</a>
+</nav>
+
+<section>
+    <h2>Educational Background</h2>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <h3>Bachelor of Arts</h3>
+            <p>A.N.H Smarak Mahavidhyalaya, Pratapgarh, U.P</p>
+            <p><strong>Completed:</strong> 2023</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>Diploma in Computer Application</h3>
+            <p>S.T.P Computer Education</p>
+            <p><strong>Completed:</strong> 2022</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Professional Certifications</h2>
+    <ul>
+        <li><a href="certifications.html#google-cert" target="_blank">Google Data Analytics Professional Certificate</a></li>
+        <li><a href="certifications.html#business-cert" target="_blank">Business Management Essentials Certificate</a></li>
+        <li><a href="certifications.html#project-cert" target="_blank">Project Management Essentials Certificate</a></li>
+    </ul>
+</section>
+
+<section>
+    <h2>Continuous Learning</h2>
+    <p>Learning never stops! Currently exploring advanced Python libraries like Plotly and Dash for dynamic visualizations, along with SQL optimization techniques.</p>
+</section>
+
+<footer>
+    <p>© 2025 Meraj Ahmad | Data Analyst Portfolio | <a href="https://www.linkedin.com/in/merajahmad786" target="_blank">LinkedIn</a></p>
+</footer>
+
+</body>
+</html>
