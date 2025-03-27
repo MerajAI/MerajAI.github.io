@@ -1,146 +1,501 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Contact - Meraj Ahmad</title>
+    <title>Contact - Meraj Ahmad | Data Analyst</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
         }
-        header {
-            background-color: #2d6a4f;
-            color: white;
-            text-align: center;
+        
+        #threejs-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 20px;
+            backdrop-filter: blur(5px);
+            background-color: rgba(0, 53, 102, 0.7);
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
-        nav {
-            background-color: #40916c;
+        
+        header {
             text-align: center;
-            padding: 10px;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(0, 53, 102, 0.8) 0%, rgba(0, 119, 182, 0.8) 100%);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 204, 0, 0.3);
         }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(0, 119, 182, 0.6);
+            border-radius: 10px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(5px);
+        }
+        
         nav a {
             color: white;
             text-decoration: none;
-            margin: 0 15px;
             font-weight: bold;
-            transition: color 0.3s;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            background: rgba(0, 53, 102, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        
         nav a:hover {
-            color: #ff6f61;
+            background: rgba(255, 204, 0, 0.8);
+            color: #003566;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3);
         }
+        
         section {
-            background-color: white;
-            margin: 20px;
+            background: rgba(255, 255, 255, 0.1);
             padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s ease;
         }
+        
         section:hover {
+            background: rgba(255, 255, 255, 0.15);
             transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
-        h1, h2 {
-            color: #2d6a4f;
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #ffcc00, #ff6600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
-        .form-group {
-            margin-bottom: 15px;
+        
+        h2 {
+            color: #ffcc00;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #0077b6;
+            padding-bottom: 10px;
+            display: inline-block;
         }
-        label {
-            font-weight: bold;
+        
+        .typed-text {
+            min-height: 60px;
             display: block;
-            margin-bottom: 5px;
+            font-size: 1.5rem;
+            color: #ffcc00;
         }
+        
+        button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #0077b6, #003566);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 119, 182, 0.4);
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+        
+        button:hover {
+            background: linear-gradient(135deg, #ff6600, #ffcc00);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 102, 0, 0.4);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+        
         input, textarea {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        button {
-            background-color: #2d6a4f;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
             color: white;
-            padding: 10px 15px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s;
+            font-size: 1rem;
         }
-        button:hover {
-            background-color: #1b4332;
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #ffcc00;
+            box-shadow: 0 0 0 2px rgba(255, 204, 0, 0.3);
         }
+        
         .contact-info {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 53, 102, 0.5);
+            border-radius: 10px;
+            border-left: 3px solid #ffcc00;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
             margin-top: 20px;
-            padding: 15px;
-            background-color: #e8f5e9;
-            border-left: 5px solid #2d6a4f;
         }
-        .contact-info a {
-            color: #2d6a4f;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        footer {
-            background-color: #2d6a4f;
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 119, 182, 0.7);
+            border-radius: 50%;
             color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: #ffcc00;
+            color: #003566;
+            transform: translateY(-3px);
+        }
+        
+        footer {
             text-align: center;
-            padding: 10px;
+            padding: 20px;
+            margin-top: 50px;
+            background: rgba(0, 53, 102, 0.8);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 204, 0, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .content-wrapper {
+                padding: 10px;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-
-<header>
-    <h1>Contact - Meraj Ahmad</h1>
-</header>
-
-<nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="skills.html">Skills</a>
-    <a href="experience.html">Experience</a>
-    <a href="projects.html">Projects</a>
-    <a href="education.html">Education</a>
-    <a href="certifications.html">Certifications</a>
-    <a href="languages.html">Languages</a>
-    <a href="contact.html">Contact</a>
-    <a href="resume.html">Resume</a>
-</nav>
-
-<section>
-    <h2>Get in Touch</h2>
-    <form action="mailto:meraj3176ahmad@gmail.com" method="post" enctype="text/plain">
-        <div class="form-group">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" placeholder="Enter your name" required>
-        </div>
-
-        <div class="form-group">
-            <label for="email">Your Email</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-        </div>
-
-        <div class="form-group">
-            <label for="message">Your Message</label>
-            <textarea id="message" name="message" rows="5" placeholder="Write your message here" required></textarea>
-        </div>
-
-        <button type="submit">Send Message</button>
-    </form>
-
-    <div class="contact-info">
-        <h3>Contact Information</h3>
-        <p><strong>Email:</strong> <a href="mailto:meraj3176ahmad@gmail.com">meraj3176ahmad@gmail.com</a></p>
-        <p><strong>Phone:</strong> <a href="tel:9651326853">9651326853</a></p>
-        <p><strong>Location:</strong> Amausi, Lucknow, Uttar Pradesh - 226008</p>
-        <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/merajahmad786" target="_blank">linkedin.com/in/merajahmad786</a></p>
+    <canvas id="threejs-canvas"></canvas>
+    
+    <div class="content-wrapper">
+        <header>
+            <h1>Contact Me</h1>
+            <div class="typed-text"></div>
+            <p>Let's connect and collaborate on data-driven projects</p>
+        </header>
+        
+        <nav>
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="about.html"><i class="fas fa-user"></i> About</a>
+            <a href="skills.html"><i class="fas fa-code"></i> Skills</a>
+            <a href="experience.html"><i class="fas fa-briefcase"></i> Experience</a>
+            <a href="projects.html"><i class="fas fa-project-diagram"></i> Projects</a>
+            <a href="education.html"><i class="fas fa-graduation-cap"></i> Education</a>
+            <a href="certifications.html"><i class="fas fa-certificate"></i> Certifications</a>
+            <a href="languages.html"><i class="fas fa-language"></i> Languages</a>
+            <a href="contact.html" class="active"><i class="fas fa-envelope"></i> Contact</a>
+            <a href="resume.html"><i class="fas fa-file-alt"></i> Resume</a>
+        </nav>
+        
+        <section>
+            <h2><i class="fas fa-paper-plane"></i> Send Me a Message</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Your Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message"><i class="fas fa-comment"></i> Your Message</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Write your message here" required></textarea>
+                </div>
+                
+                <button type="button" id="sendMessageBtn">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+            
+            <div class="contact-info">
+                <h3><i class="fas fa-address-card"></i> Contact Information</h3>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:meraj3176ahmad@gmail.com">meraj3176ahmad@gmail.com</a></p>
+                <p><i class="fas fa-phone"></i> <a href="tel:+919651326853">+91 9651326853</a></p>
+                <p><i class="fas fa-map-marker-alt"></i> Amausi, Lucknow, Uttar Pradesh - 226008</p>
+                
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/merajai" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/MerajAI" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                    <a href="https://twitter.com/MerajAI_" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/merajai" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/c/MerajAI" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>© 2025 Meraj Ahmad | Data Analyst Portfolio | <a href="https://www.linkedin.com/in/merajai" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a></p>
+        </footer>
     </div>
-</section>
 
-<footer>
-    <p>© 2025 Meraj Ahmad | Data Analyst Portfolio | <a href="https://www.linkedin.com/in/merajahmad786" target="_blank">LinkedIn</a></p>
-</footer>
-
+    <script>
+        // Three.js Background Animation (same as your portfolio)
+        const canvas = document.getElementById('threejs-canvas');
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 30;
+        
+        // Create data points (nodes)
+        const nodes = [];
+        const nodeGeometry = new THREE.SphereGeometry(0.3, 16, 16);
+        const nodeMaterial = new THREE.MeshBasicMaterial({ 
+            color: 0x0077b6,
+            transparent: true,
+            opacity: 0.8
+        });
+        
+        for (let i = 0; i < 150; i++) {
+            const node = new THREE.Mesh(nodeGeometry, nodeMaterial);
+            
+            const cluster = Math.floor(i / 50);
+            const angle = Math.random() * Math.PI * 2;
+            const radius = 5 + Math.random() * 10 + cluster * 5;
+            
+            node.position.x = Math.cos(angle) * radius;
+            node.position.y = Math.sin(angle) * radius;
+            node.position.z = (Math.random() - 0.5) * 20;
+            
+            if (cluster === 1) {
+                node.material.color.setHex(0xffcc00);
+            } else if (cluster === 2) {
+                node.material.color.setHex(0xff6600);
+            }
+            
+            node.userData = {
+                speed: 0.01 + Math.random() * 0.02,
+                angle: Math.random() * Math.PI * 2,
+                radius: radius,
+                cluster: cluster
+            };
+            
+            scene.add(node);
+            nodes.push(node);
+        }
+        
+        // Create connections between nodes (edges)
+        const edges = [];
+        const edgeMaterial = new THREE.LineBasicMaterial({ 
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.2
+        });
+        
+        for (let i = 0; i < 100; i++) {
+            const node1 = nodes[Math.floor(Math.random() * nodes.length)];
+            const node2 = nodes[Math.floor(Math.random() * nodes.length)];
+            
+            if (node1.userData.cluster === node2.userData.cluster) {
+                const edgeGeometry = new THREE.BufferGeometry().setFromPoints([
+                    new THREE.Vector3(node1.position.x, node1.position.y, node1.position.z),
+                    new THREE.Vector3(node2.position.x, node2.position.y, node2.position.z)
+                ]);
+                
+                const edge = new THREE.Line(edgeGeometry, edgeMaterial);
+                scene.add(edge);
+                edges.push(edge);
+            }
+        }
+        
+        // Add some floating data elements
+        const dataElements = [];
+        const dataShapes = [
+            new THREE.BoxGeometry(0.5, 0.5, 0.5),
+            new THREE.ConeGeometry(0.4, 1, 4),
+            new THREE.CylinderGeometry(0.3, 0.3, 1, 6),
+            new THREE.TorusGeometry(0.5, 0.2, 8, 16)
+        ];
+        
+        for (let i = 0; i < 20; i++) {
+            const shape = dataShapes[Math.floor(Math.random() * dataShapes.length)];
+            const material = new THREE.MeshBasicMaterial({
+                color: 0x00ffff,
+                transparent: true,
+                opacity: 0.6,
+                wireframe: true
+            });
+            
+            const element = new THREE.Mesh(shape, material);
+            
+            element.position.x = (Math.random() - 0.5) * 40;
+            element.position.y = (Math.random() - 0.5) * 40;
+            element.position.z = (Math.random() - 0.5) * 40;
+            
+            element.userData = {
+                speed: 0.005 + Math.random() * 0.01,
+                rotationSpeed: new THREE.Vector3(
+                    Math.random() * 0.01,
+                    Math.random() * 0.01,
+                    Math.random() * 0.01
+                )
+            };
+            
+            scene.add(element);
+            dataElements.push(element);
+        }
+        
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            nodes.forEach(node => {
+                node.userData.angle += node.userData.speed;
+                node.position.x = Math.cos(node.userData.angle) * node.userData.radius;
+                node.position.y = Math.sin(node.userData.angle) * node.userData.radius;
+                node.position.z += (Math.random() - 0.5) * 0.1;
+                
+                if (node.position.z > 20) node.position.z = -20;
+                if (node.position.z < -20) node.position.z = 20;
+            });
+            
+            dataElements.forEach(element => {
+                element.rotation.x += element.userData.rotationSpeed.x;
+                element.rotation.y += element.userData.rotationSpeed.y;
+                element.rotation.z += element.userData.rotationSpeed.z;
+                
+                element.position.z += element.userData.speed;
+                if (element.position.z > 30) {
+                    element.position.z = -30;
+                    element.position.x = (Math.random() - 0.5) * 40;
+                    element.position.y = (Math.random() - 0.5) * 40;
+                }
+            });
+            
+            edges.forEach(edge => {
+                const positions = edge.geometry.attributes.position;
+                const node1 = edge.userData.node1 || nodes[Math.floor(Math.random() * nodes.length)];
+                const node2 = edge.userData.node2 || nodes[Math.floor(Math.random() * nodes.length)];
+                
+                if (Math.random() > 0.95 && node1.userData.cluster === node2.userData.cluster) {
+                    positions.setXYZ(0, node1.position.x, node1.position.y, node1.position.z);
+                    positions.setXYZ(1, node2.position.x, node2.position.y, node2.position.z);
+                    positions.needsUpdate = true;
+                    edge.userData.node1 = node1;
+                    edge.userData.node2 = node2;
+                }
+            });
+            
+            scene.rotation.y += 0.001;
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Typed.js animation
+        const typed = new Typed('.typed-text', {
+            strings: [
+                'Get in Touch',
+                'Let\'s Collaborate',
+                'Discuss a Project',
+                'Hire Me',
+                'Ask a Question',
+                'Connect Professionally'
+            ],
+            typeSpeed: 50,
+            backSpeed: 30,
+            loop: true
+        });
+        
+        // Contact form functionality
+        document.getElementById('sendMessageBtn').addEventListener('click', function() {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            if (name && email && message) {
+                const subject = `Message from ${name}`;
+                const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+                
+                // Create a temporary form
+                const form = document.createElement('form');
+                form.action = `mailto:meraj3176ahmad@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                form.method = 'POST';
+                form.enctype = 'text/plain';
+                form.style.display = 'none';
+                
+                document.body.appendChild(form);
+                form.submit();
+                document.body.removeChild(form);
+            } else {
+                alert('Please fill in all fields before sending.');
+            }
+        });
+    </script>
 </body>
 </html>
