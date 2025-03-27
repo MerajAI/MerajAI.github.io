@@ -1,135 +1,881 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Meraj Ahmad - Data Analyst Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Skills - Meraj Ahmad | Data Analyst</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        :root {
+            --primary: #023e8a;
+            --secondary: #0077b6;
+            --accent: #ffcc00;
+            --light-blue: #caf0f8;
+            --dark-blue: #03045e;
+            --dark: #0a1128;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            background-color: #fefae0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            transition: background-color 0.5s ease;
-        }
-        header {
-            background-color: #003566;
             color: white;
-            text-align: center;
+            line-height: 1.6;
+            background-color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        #threejs-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.8;
+        }
+        
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 20px;
         }
-        nav {
-            background-color: #0077b6;
+        
+        header {
+            background: linear-gradient(135deg, rgba(2, 62, 138, 0.9), rgba(0, 119, 182, 0.9));
+            color: white;
             text-align: center;
-            padding: 10px;
+            padding: 40px 20px;
+            border-radius: 20px;
+            margin: 30px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 204, 0, 0.2);
         }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.1"/></svg>');
+            opacity: 0.1;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 20px;
+            background: rgba(0, 119, 182, 0.7);
+            border-radius: 15px;
+            margin: 0 20px 40px;
+            backdrop-filter: blur(5px);
+        }
+        
         nav a {
             color: white;
             text-decoration: none;
-            margin: 0 15px;
             font-weight: bold;
-            transition: color 0.3s;
-        }
-        nav a:hover {
-            color: #ffcc00;
-        }
-        section {
-            background-color: white;
-            margin: 20px;
-            padding: 20px;
+            padding: 12px 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: background-color 0.5s ease;
+            transition: all 0.3s ease;
+            background: rgba(2, 62, 138, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
+        
+        nav a:hover {
+            background: rgba(255, 204, 0, 0.9);
+            color: var(--dark-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 204, 0, 0.4);
+        }
+        
+        nav a i {
+            font-size: 1.2rem;
+        }
+        
+        section {
+            background: rgba(255, 255, 255, 0.12);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 0 20px 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+        
         section:hover {
-            background-color: #f0f4f8;
+            background: rgba(255, 255, 255, 0.18);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
-        h1, h2 {
-            color: #0077b6;
+        
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,0 L100,100 M100,0 L0,100" stroke="%23ffffff" opacity="0.03" stroke-width="1"/></svg>');
         }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--accent), #ff6600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        h2 {
+            color: var(--accent);
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 15px;
+            display: inline-block;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: #ff6600;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .skill-category {
+            margin-bottom: 30px;
+        }
+        
+        .skill-category h3 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .skill-category h3 i {
+            font-size: 1.8rem;
+        }
+        
+        .skill-item {
+            margin-bottom: 20px;
+        }
+        
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .skill-name {
+            color: white;
+        }
+        
+        .skill-level {
+            color: var(--accent);
+        }
+        
+        .skill-bar {
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            border-radius: 6px;
+            position: relative;
+            transition: width 1.5s ease-out;
+        }
+        
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                to right,
+                rgba(255,255,255,0.1) 0%,
+                rgba(255,255,255,0.3) 50%,
+                rgba(255,255,255,0.1) 100%
+            );
+            animation: shine 2s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Skill colors */
+        .excel { background: linear-gradient(90deg, #1f7a1f, #4caf50); }
+        .powerbi { background: linear-gradient(90deg, #f9c74f, #f8961e); }
+        .sql { background: linear-gradient(90deg, #577590, #43aa8b); }
+        .python { background: linear-gradient(90deg, #f94144, #f3722c); }
+        .dataviz { background: linear-gradient(90deg, #4361ee, #3a0ca3); }
+        .ml { background: linear-gradient(90deg, #f72585, #b5179e); }
+        .stats { background: linear-gradient(90deg, #4895ef, #4cc9f0); }
+        .cloud { background: linear-gradient(90deg, #7209b7, #560bad); }
+        
+        .tools-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .tools-container {
+            background: rgba(0, 53, 102, 0.3);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 204, 0, 0.1);
+        }
+        
+        .tools-container h3 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .tools-container h3 i {
+            font-size: 1.8rem;
+        }
+        
+        .tools-list {
+            list-style-type: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        
+        .tools-list li {
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 40px;
+            border-left: 3px solid var(--secondary);
+        }
+        
+        .tools-list li:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+            border-left: 3px solid var(--accent);
+        }
+        
+        .tools-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 15px;
+            color: var(--accent);
+        }
+        
+        .chart-container {
+            background: rgba(0, 53, 102, 0.3);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 1px solid rgba(255, 204, 0, 0.1);
+        }
+        
+        canvas {
+            width: 100% !important;
+            height: auto !important;
+        }
+        
         footer {
-            background-color: #003566;
-            color: white;
             text-align: center;
-            padding: 10px;
+            padding: 30px;
+            margin-top: 60px;
+            background: rgba(0, 53, 102, 0.9);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 204, 0, 0.3);
+            position: relative;
+            margin: 40px 20px 0;
         }
-        button {
-            padding: 8px 16px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            background-color: #0077b6;
-            color: white;
-            font-weight: bold;
-            transition: background-color 0.3s;
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="20" viewBox="0 0 100 20"><path d="M0,10 Q25,20 50,10 T100,10" stroke="%23ffcc00" fill="none" stroke-width="0.5" opacity="0.3"/></svg>');
+            opacity: 0.3;
         }
-        button:hover {
-            background-color: #ff6600;
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        footer a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        footer a:hover::after {
+            transform: scaleX(1);
+        }
+        
+        @media (max-width: 992px) {
+            .skills-grid, .tools-section {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .content-wrapper {
+                padding: 10px;
+            }
+            
+            section {
+                padding: 25px;
+            }
         }
     </style>
-    <script>
-        function toggleDarkMode() {
-            document.body.style.backgroundColor =
-                document.body.style.backgroundColor === 'rgb(34, 34, 34)' ? '#fefae0' : '#222';
-            document.body.style.color =
-                document.body.style.color === 'white' ? 'black' : 'white';
-        }
-    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <div id="threejs-bg"></div>
+    
+    <div class="content-wrapper">
+        <header>
+            <h1>My Data Skills</h1>
+            <p>Interactive 3D Visualization of My Technical Proficiencies</p>
+        </header>
+        
+        <nav>
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="about.html"><i class="fas fa-user"></i> About</a>
+            <a href="skills.html"><i class="fas fa-code"></i> Skills</a>
+            <a href="experience.html"><i class="fas fa-briefcase"></i> Experience</a>
+            <a href="projects.html"><i class="fas fa-project-diagram"></i> Projects</a>
+            <a href="education.html"><i class="fas fa-graduation-cap"></i> Education</a>
+            <a href="certifications.html"><i class="fas fa-certificate"></i> Certifications</a>
+            <a href="languages.html"><i class="fas fa-language"></i> Languages</a>
+            <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+            <a href="resume.html"><i class="fas fa-file-alt"></i> Resume</a>
+        </nav>
+        
+        <section>
+            <h2><i class="fas fa-chart-line"></i> Technical Skills Matrix</h2>
+            <div class="skills-grid">
+                <div>
+                    <div class="skill-category">
+                        <h3><i class="fas fa-file-excel"></i> Data Tools</h3>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Microsoft Excel</span>
+                                <span class="skill-level">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress excel" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Power BI</span>
+                                <span class="skill-level">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress powerbi" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">SQL</span>
+                                <span class="skill-level">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress sql" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3><i class="fas fa-laptop-code"></i> Programming</h3>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Python</span>
+                                <span class="skill-level">75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress python" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">VBA</span>
+                                <span class="skill-level">70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress excel" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="skill-category">
+                        <h3><i class="fas fa-chart-pie"></i> Data Science</h3>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Data Visualization</span>
+                                <span class="skill-level">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress dataviz" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Machine Learning</span>
+                                <span class="skill-level">65%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress ml" style="width: 65%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Statistics</span>
+                                <span class="skill-level">75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress stats" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3><i class="fas fa-cloud"></i> Cloud & Big Data</h3>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">AWS/Azure</span>
+                                <span class="skill-level">60%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress cloud" style="width: 60%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Hadoop/Spark</span>
+                                <span class="skill-level">50%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress cloud" style="width: 50%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h3><i class="fas fa-chart-bar"></i> Skills Radar Chart</h3>
+                <canvas id="skillsRadar"></canvas>
+            </div>
+        </section>
+        
+        <section>
+            <h2><i class="fas fa-tools"></i> Tools & Technologies</h2>
+            <div class="tools-section">
+                <div class="tools-container">
+                    <h3><i class="fas fa-database"></i> Data Tools</h3>
+                    <ul class="tools-list">
+                        <li>Advanced Excel (Pivot Tables, Power Query, VBA)</li>
+                        <li>Power BI (DAX, Data Modeling, Visuals)</li>
+                        <li>SQL Server, MySQL (Complex Queries)</li>
+                        <li>Tableau, Google Data Studio</li>
+                        <li>Power Query & Data Transformation</li>
+                    </ul>
+                </div>
+                
+                <div class="tools-container">
+                    <h3><i class="fas fa-code"></i> Programming</h3>
+                    <ul class="tools-list">
+                        <li>Python (Pandas, NumPy, Matplotlib)</li>
+                        <li>Machine Learning (Scikit-learn)</li>
+                        <li>Cloud Platforms (AWS, Azure)</li>
+                        <li>Big Data Tools (Hadoop, Spark)</li>
+                        <li>Git & Version Control</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2><i class="fas fa-users"></i> Soft Skills</h2>
+            <div class="tools-section">
+                <div class="tools-container">
+                    <h3><i class="fas fa-brain"></i> Analytical</h3>
+                    <ul class="tools-list">
+                        <li>Data-Driven Decision Making</li>
+                        <li>Problem Solving & Critical Thinking</li>
+                        <li>Business Intelligence</li>
+                        <li>Requirements Analysis</li>
+                    </ul>
+                </div>
+                
+                <div class="tools-container">
+                    <h3><i class="fas fa-comments"></i> Interpersonal</h3>
+                    <ul class="tools-list">
+                        <li>Communication & Presentation</li>
+                        <li>Project Management</li>
+                        <li>Team Collaboration</li>
+                        <li>Stakeholder Management</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>© 2025 Meraj Ahmad | Data Analyst Portfolio | 
+               <a href="https://www.linkedin.com/in/merajai" target="_blank">LinkedIn</a> | 
+               <a href="https://github.com/MerajAI" target="_blank">GitHub</a>
+            </p>
+        </footer>
+    </div>
 
-<header>
-    <h1>Welcome to Meraj Ahmad Data Analyst Portfolio</h1>
-</header>
-
-<nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="skills.html">Skills</a>
-    <a href="experience.html">Experience</a>
-    <a href="projects.html">Projects</a>
-    <a href="education.html">Education</a>
-    <a href="certifications.html">Certifications</a>
-    <a href="languages.html">Languages</a>
-    <a href="contact.html">Contact</a>
-    <a href="resume.html">Resume</a>
-</nav>
-
-<section>
-    <h2>Hi, I’m Meraj Ahmad 👋</h2>
-    <p>A passionate <strong>Senior Data Analyst & MIS Executive</strong> with expertise in data management, reporting automation, data visualization, and Python data analysis.</p>
-    <p>I turn complex data into clear, actionable insights that drive business success.</p>
-    <button onclick="toggleDarkMode()">Toggle Dark Mode 🌗</button>
-</section>
-
-<section>
-    <h2>Specializations</h2>
-    <ul>
-        <li><strong>Data Analysis & Reporting</strong>: Excel, Power BI, SQL</li>
-        <li><strong>Automation & Process Optimization</strong>: VBA Macros, Power Query</li>
-        <li><strong>Data Visualization</strong>: Power BI Dashboards, Excel Charts</li>
-        <li><strong>Data Science Basics</strong>: Python (Pandas, NumPy, Matplotlib, Seaborn)</li>
-    </ul>
-</section>
-
-<section>
-    <h2>Featured Projects</h2>
-    <ol>
-        <li><a href="projects.html#sales-dashboard">Sales Dashboard - Excel & Power BI</a></li>
-        <li><a href="projects.html#customer-service-report">Customer Service Report Automation</a></li>
-        <li><a href="projects.html#cyber-cafe-analysis">Cyber Cafe Sales Analysis - SQL & Python</a></li>
-        <li><a href="projects.html#kpi-tracker">SBI Credit Card KPI Tracker</a></li>
-        <li><a href="projects.html#retail-billing">Retail Billing System with Automation</a></li>
-        <li><a href="projects.html#predictive-sales">Predictive Sales Analysis - Python ML</a></li>
-    </ol>
-</section>
-
-<section>
-    <h2>Contact Me</h2>
-    <p>Let’s collaborate! Feel free to reach out via <a href="contact.html">Contact Page</a> or connect on <a href="https://www.linkedin.com/in/merajahmad786" target="_blank">LinkedIn</a>.</p>
-</section>
-
-<footer>
-    <p>© 2025 Meraj Ahmad | Data Analyst Portfolio | <a href="https://www.linkedin.com/in/merajahmad786" target="_blank">LinkedIn</a></p>
-</footer>
-
+    <script>
+        // Three.js Background Animation
+        const bgContainer = document.getElementById('threejs-bg');
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        bgContainer.appendChild(renderer.domElement);
+        
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 30;
+        
+        // Create data nodes
+        const nodes = [];
+        const nodeGeometry = new THREE.SphereGeometry(0.4, 16, 16);
+        
+        // Skill colors
+        const skillColors = [
+            0x4caf50, // Excel
+            0xf9c74f, // Power BI
+            0x43aa8b, // SQL
+            0xf94144, // Python
+            0x4361ee, // Data Viz
+            0xf72585, // ML
+            0x4895ef, // Stats
+            0x7209b7  // Cloud
+        ];
+        
+        // Create skill clusters
+        for (let i = 0; i < 8; i++) {
+            const color = skillColors[i];
+            const material = new THREE.MeshBasicMaterial({ 
+                color: color,
+                transparent: true,
+                opacity: 0.8
+            });
+            
+            // Create cluster of nodes
+            for (let j = 0; j < 15; j++) {
+                const node = new THREE.Mesh(nodeGeometry, material);
+                
+                // Position in cluster
+                const angle = Math.random() * Math.PI * 2;
+                const radius = 3 + Math.random() * 2;
+                const height = (Math.random() - 0.5) * 10;
+                
+                node.position.x = Math.cos(angle) * radius + (i % 4) * 10 - 15;
+                node.position.y = Math.sin(angle) * radius + Math.floor(i / 4) * 10 - 5;
+                node.position.z = height;
+                
+                // Animation properties
+                node.userData = {
+                    speed: 0.01 + Math.random() * 0.02,
+                    angle: angle,
+                    radius: radius,
+                    cluster: i
+                };
+                
+                scene.add(node);
+                nodes.push(node);
+            }
+        }
+        
+        // Create connections between nodes
+        const edges = [];
+        const edgeMaterial = new THREE.LineBasicMaterial({ 
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.1
+        });
+        
+        for (let i = 0; i < 100; i++) {
+            const node1 = nodes[Math.floor(Math.random() * nodes.length)];
+            const node2 = nodes[Math.floor(Math.random() * nodes.length)];
+            
+            // Higher chance to connect within same cluster
+            if (node1.userData.cluster === node2.userData.cluster || Math.random() > 0.8) {
+                const edgeGeometry = new THREE.BufferGeometry().setFromPoints([
+                    node1.position,
+                    node2.position
+                ]);
+                
+                const edge = new THREE.Line(edgeGeometry, edgeMaterial);
+                scene.add(edge);
+                edges.push({
+                    line: edge,
+                    node1: node1,
+                    node2: node2
+                });
+            }
+        }
+        
+        // Add floating data elements
+        const dataElements = [];
+        const shapes = [
+            new THREE.BoxGeometry(0.8, 0.8, 0.8),
+            new THREE.ConeGeometry(0.6, 1.5, 4),
+            new THREE.CylinderGeometry(0.5, 0.5, 1.2, 6),
+            new THREE.TorusGeometry(0.7, 0.3, 8, 16)
+        ];
+        
+        for (let i = 0; i < 20; i++) {
+            const shape = shapes[Math.floor(Math.random() * shapes.length)];
+            const material = new THREE.MeshBasicMaterial({
+                color: 0x00ffff,
+                transparent: true,
+                opacity: 0.4,
+                wireframe: true
+            });
+            
+            const element = new THREE.Mesh(shape, material);
+            
+            element.position.x = (Math.random() - 0.5) * 40;
+            element.position.y = (Math.random() - 0.5) * 40;
+            element.position.z = (Math.random() - 0.5) * 40;
+            
+            element.userData = {
+                speed: 0.005 + Math.random() * 0.01,
+                rotationSpeed: new THREE.Vector3(
+                    Math.random() * 0.01,
+                    Math.random() * 0.01,
+                    Math.random() * 0.01
+                )
+            };
+            
+            scene.add(element);
+            dataElements.push(element);
+        }
+        
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Animate nodes in clusters
+            nodes.forEach(node => {
+                node.userData.angle += node.userData.speed;
+                const clusterCenterX = (node.userData.cluster % 4) * 10 - 15;
+                const clusterCenterY = Math.floor(node.userData.cluster / 4) * 10 - 5;
+                
+                node.position.x = Math.cos(node.userData.angle) * node.userData.radius + clusterCenterX;
+                node.position.y = Math.sin(node.userData.angle) * node.userData.radius + clusterCenterY;
+                node.position.z += (Math.random() - 0.5) * 0.1;
+                
+                // Keep z-position within bounds
+                if (node.position.z > 20) node.position.z = -20;
+                if (node.position.z < -20) node.position.z = 20;
+            });
+            
+            // Animate data elements
+            dataElements.forEach(element => {
+                element.rotation.x += element.userData.rotationSpeed.x;
+                element.rotation.y += element.userData.rotationSpeed.y;
+                element.rotation.z += element.userData.rotationSpeed.z;
+                
+                element.position.z += element.userData.speed;
+                if (element.position.z > 30) {
+                    element.position.z = -30;
+                    element.position.x = (Math.random() - 0.5) * 40;
+                    element.position.y = (Math.random() - 0.5) * 40;
+                }
+            });
+            
+            // Update edges
+            edges.forEach(edge => {
+                const positions = edge.line.geometry.attributes.position;
+                positions.setXYZ(0, edge.node1.position.x, edge.node1.position.y, edge.node1.position.z);
+                positions.setXYZ(1, edge.node2.position.x, edge.node2.position.y, edge.node2.position.z);
+                positions.needsUpdate = true;
+            });
+            
+            // Slowly rotate the entire scene
+            scene.rotation.y += 0.0005;
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Skills Radar Chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('skillsRadar').getContext('2d');
+            const skillsRadar = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        'Excel', 
+                        'Power BI', 
+                        'SQL', 
+                        'Python', 
+                        'Data Viz', 
+                        'ML', 
+                        'Stats',
+                        'Cloud'
+                    ],
+                    datasets: [{
+                        label: 'Skill Level',
+                        data: [90, 85, 80, 75, 85, 65, 75, 60],
+                        backgroundColor: 'rgba(0, 119, 182, 0.5)',
+                        borderColor: '#ffcc00',
+                        borderWidth: 2,
+                        pointBackgroundColor: [
+                            '#4caf50',
+                            '#f9c74f',
+                            '#43aa8b',
+                            '#f94144',
+                            '#4361ee',
+                            '#f72585',
+                            '#4895ef',
+                            '#7209b7'
+                        ],
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            pointLabels: {
+                                color: 'white',
+                                font: {
+                                    size: 12
+                                }
+                            },
+                            ticks: {
+                                backdropColor: 'transparent',
+                                color: 'rgba(255, 255, 255, 0.5)',
+                                stepSize: 20
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'white',
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Animate skill bars
+            const skillBars = document.querySelectorAll('.skill-progress');
+            skillBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        });
+    </script>
 </body>
 </html>
