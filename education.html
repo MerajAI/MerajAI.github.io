@@ -1,158 +1,599 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Education - Meraj Ahmad</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Education - Meraj Ahmad | Data Analyst</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
+        :root {
+            --primary: #023e8a;
+            --secondary: #0077b6;
+            --accent: #ffcc00;
+            --light-blue: #caf0f8;
+            --dark-blue: #03045e;
+            --dark: #0a1128;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-        }
-        header {
-            background-color: #023e8a;
             color: white;
-            text-align: center;
+            line-height: 1.6;
+            background-color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        #threejs-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.8;
+        }
+        
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 20px;
         }
-        nav {
-            background-color: #0077b6;
+        
+        header {
+            background: linear-gradient(135deg, rgba(2, 62, 138, 0.9), rgba(0, 119, 182, 0.9));
+            color: white;
             text-align: center;
-            padding: 10px;
+            padding: 40px 20px;
+            border-radius: 20px;
+            margin: 30px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 204, 0, 0.2);
         }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.1"/></svg>');
+            opacity: 0.1;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 20px;
+            background: rgba(0, 119, 182, 0.7);
+            border-radius: 15px;
+            margin: 0 20px 40px;
+            backdrop-filter: blur(5px);
+        }
+        
         nav a {
             color: white;
             text-decoration: none;
-            margin: 0 15px;
             font-weight: bold;
-            transition: color 0.3s;
-        }
-        nav a:hover {
-            color: #ff6f61;
-        }
-        section {
-            background-color: white;
-            margin: 20px;
-            padding: 20px;
+            padding: 12px 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
+            background: rgba(2, 62, 138, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        section:hover {
+        
+        nav a:hover {
+            background: rgba(255, 204, 0, 0.9);
+            color: var(--dark-blue);
             transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 204, 0, 0.4);
         }
-        h1, h2 {
-            color: #0077b6;
+        
+        nav a i {
+            font-size: 1.2rem;
         }
+        
+        section {
+            background: rgba(255, 255, 255, 0.12);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 0 20px 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+        
+        section:hover {
+            background: rgba(255, 255, 255, 0.18);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,0 L100,100 M100,0 L0,100" stroke="%23ffffff" opacity="0.03" stroke-width="1"/></svg>');
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--accent), #ff6600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        h2 {
+            color: var(--accent);
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 15px;
+            display: inline-block;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: #ff6600;
+        }
+        
         .timeline {
             position: relative;
-            padding-left: 30px;
-            margin-top: 20px;
+            padding-left: 60px;
+            margin-top: 40px;
         }
+        
         .timeline::before {
             content: '';
             position: absolute;
-            left: 10px;
+            left: 30px;
             top: 0;
             width: 4px;
             height: 100%;
-            background-color: #0077b6;
+            background: linear-gradient(to bottom, var(--secondary), var(--accent));
             animation: growLine 2s ease forwards;
+            border-radius: 2px;
         }
+        
         @keyframes growLine {
             from { height: 0; }
             to { height: 100%; }
         }
+        
         .timeline-item {
             position: relative;
-            margin: 15px 0;
-            padding: 15px;
-            background-color: #e3f2fd;
-            border-radius: 6px;
-            transition: background-color 0.3s;
+            margin: 30px 0;
+            padding: 30px;
+            background: rgba(0, 53, 102, 0.3);
+            border-radius: 15px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
         }
+        
         .timeline-item:hover {
-            background-color: #caf0f8;
+            transform: translateX(10px);
+            background: rgba(0, 53, 102, 0.5);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
+        
         .timeline-item::before {
             content: '';
             position: absolute;
-            top: 20px;
+            top: 35px;
             left: -35px;
-            width: 15px;
-            height: 15px;
-            background-color: #0077b6;
-            border: 3px solid white;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border: 3px solid var(--dark);
             border-radius: 50%;
             z-index: 1;
+            box-shadow: 0 0 0 4px rgba(255, 204, 0, 0.2);
         }
-        footer {
-            background-color: #023e8a;
+        
+        h3 {
+            color: var(--accent);
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        p {
+            color: var(--light-blue);
+            margin-bottom: 10px;
+        }
+        
+        strong {
             color: white;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+        
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        a:hover::after {
+            transform: scaleX(1);
+        }
+        
+        footer {
             text-align: center;
-            padding: 10px;
+            padding: 30px;
+            margin-top: 60px;
+            background: rgba(0, 53, 102, 0.9);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 204, 0, 0.3);
+            position: relative;
+            margin: 40px 20px 0;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="20" viewBox="0 0 100 20"><path d="M0,10 Q25,20 50,10 T100,10" stroke="%23ffcc00" fill="none" stroke-width="0.5" opacity="0.3"/></svg>');
+            opacity: 0.3;
+        }
+        
+        /* Animation for timeline items */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .timeline-item {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+        
+        .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.6s; }
+        
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .content-wrapper {
+                padding: 10px;
+            }
+            
+            section {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .timeline {
+                padding-left: 40px;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item::before {
+                left: -25px;
+            }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
-<header>
-    <h1>Education - Meraj Ahmad</h1>
-</header>
-
-<nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="skills.html">Skills</a>
-    <a href="experience.html">Experience</a>
-    <a href="projects.html">Projects</a>
-    <a href="education.html">Education</a>
-    <a href="certifications.html">Certifications</a>
-    <a href="languages.html">Languages</a>
-    <a href="contact.html">Contact</a>
-    <a href="resume.html">Resume</a>
-</nav>
-
-<section>
-    <h2>Educational Background</h2>
-
-    <div class="timeline">
-         <div class="timeline-item">
-            <h3>Bachelor of Arts (BA)</h3>
-            <p>Allahabad State University</p>
-            <p><strong>Completed:</strong> 2023</p>
-        </div>
-
-        <div class="timeline-item">
-            <h3>Higher Secondary (12th) - Science  (Mathematics)</h3>
-            <p>Uttar Pradesh State Board of High School and Intermediate Education</p>
-            <p><strong>Completed:</strong> 2020</p>
-        </div>
-
-        <div class="timeline-item">
-            <h3>Diploma in Web Development</h3>
-            <p>S.T.P Computer Education</p>
-            <p><strong>Completed:</strong> 2025</p>
+    <div id="threejs-bg"></div>
+    
+    <div class="content-wrapper">
+        <header>
+            <h1>My Education</h1>
+            <p>Interactive 3D Timeline of My Academic Journey</p>
+        </header>
+        
+        <nav>
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="about.html"><i class="fas fa-user"></i> About</a>
+            <a href="skills.html"><i class="fas fa-code"></i> Skills</a>
+            <a href="experience.html"><i class="fas fa-briefcase"></i> Experience</a>
+            <a href="projects.html"><i class="fas fa-project-diagram"></i> Projects</a>
+            <a href="education.html"><i class="fas fa-graduation-cap"></i> Education</a>
+            <a href="certifications.html"><i class="fas fa-certificate"></i> Certifications</a>
+            <a href="languages.html"><i class="fas fa-language"></i> Languages</a>
+            <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+            <a href="resume.html"><i class="fas fa-file-alt"></i> Resume</a>
+        </nav>
+        
+        <section>
+            <h2><i class="fas fa-university"></i> Educational Background</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Bachelor of Arts (BA)</h3>
+                    <p>Allahabad State University</p>
+                    <p><strong>Completed:</strong> 2023</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3>Higher Secondary (12th) - Science (Mathematics)</h3>
+                    <p>Uttar Pradesh State Board of High School and Intermediate Education</p>
+                    <p><strong>Completed:</strong> 2020</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3>Diploma in Web Development</h3>
+                    <p>S.T.P Computer Education</p>
+                    <p><strong>Completed:</strong> 2025</p>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2><i class="fas fa-award"></i> Professional Certifications</h2>
+            <ul>
+                <li><a href="certifications.html#google-cert" target="_blank"><i class="fab fa-google"></i> Google Data Analytics Professional Certificate</a></li>
+                <li><a href="certifications.html#business-cert" target="_blank"><i class="fas fa-cloud"></i> Google Cloud Big Data and Machine Learning Certificate</a></li>
+                <li><a href="certifications.html#project-cert" target="_blank"><i class="fas fa-chart-bar"></i> Business Analytics with Excel: Elementary to Advanced Certificate</a></li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2><i class="fas fa-brain"></i> Continuous Learning</h2>
+            <p>Learning never stops! Currently exploring advanced Python libraries like Plotly and Dash for dynamic visualizations, along with SQL optimization techniques.</p>
+        </section>
+        
+        <footer>
+            <p>© 2025 Meraj Ahmad | Data Analyst Portfolio | 
+               <a href="https://www.linkedin.com/in/merajai" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a> | 
+               <a href="https://github.com/MerajAI" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            </p>
+        </footer>
     </div>
-</section>
 
-<section>
-    <h2>Professional Certifications</h2>
-    <ul>
-        <li><a href="certifications.html#google-cert" target="_blank">Google Data Analytics Professional Certificate</a></li>
-        <li><a href="certifications.html#business-cert" target="_blank">Google Cloud Big Data and Machine Learning Certificate</a></li>
-        <li><a href="certifications.html#project-cert" target="_blank">Business Analytics with Excel: Elementary to Advanced Certificate</a></li>
-    </ul>
-</section>
-
-<section>
-    <h2>Continuous Learning</h2>
-    <p>Learning never stops! Currently exploring advanced Python libraries like Plotly and Dash for dynamic visualizations, along with SQL optimization techniques.</p>
-</section>
-
-<footer>
-    <p>© 2025 Meraj Ahmad | Data Analyst Portfolio | <a href="https://www.linkedin.com/in/merajahmad786" target="_blank">LinkedIn</a></p>
-</footer>
-
+    <script>
+        // Three.js Background Animation
+        const bgContainer = document.getElementById('threejs-bg');
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        bgContainer.appendChild(renderer.domElement);
+        
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 30;
+        
+        // Create education nodes
+        const nodes = [];
+        const nodeGeometry = new THREE.SphereGeometry(0.4, 16, 16);
+        
+        // Education colors
+        const eduColors = [
+            0x4caf50, // BA Degree
+            0xf9c74f, // Higher Secondary
+            0x43aa8b  // Web Development
+        ];
+        
+        // Create education clusters
+        for (let i = 0; i < 3; i++) {
+            const color = eduColors[i];
+            const material = new THREE.MeshBasicMaterial({ 
+                color: color,
+                transparent: true,
+                opacity: 0.8
+            });
+            
+            // Create cluster of nodes
+            for (let j = 0; j < 10; j++) {
+                const node = new THREE.Mesh(nodeGeometry, material);
+                
+                // Position in cluster
+                const angle = Math.random() * Math.PI * 2;
+                const radius = 3 + Math.random() * 2;
+                const height = (Math.random() - 0.5) * 10;
+                
+                node.position.x = Math.cos(angle) * radius + (i * 10) - 10;
+                node.position.y = Math.sin(angle) * radius;
+                node.position.z = height;
+                
+                // Animation properties
+                node.userData = {
+                    speed: 0.01 + Math.random() * 0.02,
+                    angle: angle,
+                    radius: radius,
+                    cluster: i
+                };
+                
+                scene.add(node);
+                nodes.push(node);
+            }
+        }
+        
+        // Create connections between nodes
+        const edges = [];
+        const edgeMaterial = new THREE.LineBasicMaterial({ 
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.1
+        });
+        
+        for (let i = 0; i < 40; i++) {
+            const node1 = nodes[Math.floor(Math.random() * nodes.length)];
+            const node2 = nodes[Math.floor(Math.random() * nodes.length)];
+            
+            // Higher chance to connect within same cluster
+            if (node1.userData.cluster === node2.userData.cluster || Math.random() > 0.8) {
+                const edgeGeometry = new THREE.BufferGeometry().setFromPoints([
+                    node1.position,
+                    node2.position
+                ]);
+                
+                const edge = new THREE.Line(edgeGeometry, edgeMaterial);
+                scene.add(edge);
+                edges.push({
+                    line: edge,
+                    node1: node1,
+                    node2: node2
+                });
+            }
+        }
+        
+        // Add floating book elements
+        const bookElements = [];
+        const bookShapes = [
+            new THREE.BoxGeometry(1.2, 1.8, 0.4),
+            new THREE.BoxGeometry(1.5, 2, 0.5)
+        ];
+        
+        for (let i = 0; i < 8; i++) {
+            const shape = bookShapes[Math.floor(Math.random() * bookShapes.length)];
+            const material = new THREE.MeshBasicMaterial({
+                color: 0x00ffff,
+                transparent: true,
+                opacity: 0.3,
+                wireframe: true
+            });
+            
+            const element = new THREE.Mesh(shape, material);
+            
+            element.position.x = (Math.random() - 0.5) * 40;
+            element.position.y = (Math.random() - 0.5) * 40;
+            element.position.z = (Math.random() - 0.5) * 40;
+            
+            element.userData = {
+                speed: 0.003 + Math.random() * 0.007,
+                rotationSpeed: new THREE.Vector3(
+                    Math.random() * 0.005,
+                    Math.random() * 0.005,
+                    Math.random() * 0.005
+                )
+            };
+            
+            scene.add(element);
+            bookElements.push(element);
+        }
+        
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Animate nodes in clusters
+            nodes.forEach(node => {
+                node.userData.angle += node.userData.speed;
+                const clusterCenterX = (node.userData.cluster * 10) - 10;
+                
+                node.position.x = Math.cos(node.userData.angle) * node.userData.radius + clusterCenterX;
+                node.position.y = Math.sin(node.userData.angle) * node.userData.radius;
+                node.position.z += (Math.random() - 0.5) * 0.1;
+                
+                // Keep z-position within bounds
+                if (node.position.z > 20) node.position.z = -20;
+                if (node.position.z < -20) node.position.z = 20;
+            });
+            
+            // Animate book elements
+            bookElements.forEach(element => {
+                element.rotation.x += element.userData.rotationSpeed.x;
+                element.rotation.y += element.userData.rotationSpeed.y;
+                element.rotation.z += element.userData.rotationSpeed.z;
+                
+                element.position.z += element.userData.speed;
+                if (element.position.z > 30) {
+                    element.position.z = -30;
+                    element.position.x = (Math.random() - 0.5) * 40;
+                    element.position.y = (Math.random() - 0.5) * 40;
+                }
+            });
+            
+            // Update edges
+            edges.forEach(edge => {
+                const positions = edge.line.geometry.attributes.position;
+                positions.setXYZ(0, edge.node1.position.x, edge.node1.position.y, edge.node1.position.z);
+                positions.setXYZ(1, edge.node2.position.x, edge.node2.position.y, edge.node2.position.z);
+                positions.needsUpdate = true;
+            });
+            
+            // Slowly rotate the entire scene
+            scene.rotation.y += 0.0005;
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
 </body>
 </html>
