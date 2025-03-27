@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Skills - Meraj Ahmad | Data Analyst</title>
+    <title>Meraj Ahmad - 3D Data Analyst Portfolio</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <style>
         :root {
             --primary: #023e8a;
@@ -17,9 +17,9 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: white;
             line-height: 1.6;
             background-color: var(--dark);
@@ -102,10 +102,6 @@
             box-shadow: 0 8px 20px rgba(255, 204, 0, 0.4);
         }
         
-        nav a i {
-            font-size: 1.2rem;
-        }
-        
         section {
             background: rgba(255, 255, 255, 0.12);
             padding: 40px;
@@ -163,163 +159,72 @@
             background: #ff6600;
         }
         
-        .skills-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-        
-        .skill-category {
-            margin-bottom: 30px;
-        }
-        
-        .skill-category h3 {
-            color: var(--accent);
+        .typed-text {
+            min-height: 60px;
+            display: block;
             font-size: 1.5rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            color: var(--accent);
         }
         
-        .skill-category h3 i {
-            font-size: 1.8rem;
-        }
-        
-        .skill-item {
-            margin-bottom: 20px;
-        }
-        
-        .skill-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        
-        .skill-name {
+        button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--secondary), var(--dark-blue));
             color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 119, 182, 0.4);
+            margin-top: 20px;
+            font-size: 1rem;
         }
         
-        .skill-level {
-            color: var(--accent);
+        button:hover {
+            background: linear-gradient(135deg, #ff6600, var(--accent));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 102, 0, 0.4);
         }
         
-        .skill-bar {
-            height: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .skill-progress {
-            height: 100%;
-            border-radius: 6px;
-            position: relative;
-            transition: width 1.5s ease-out;
-        }
-        
-        .skill-progress::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(
-                to right,
-                rgba(255,255,255,0.1) 0%,
-                rgba(255,255,255,0.3) 50%,
-                rgba(255,255,255,0.1) 100%
-            );
-            animation: shine 2s infinite;
-        }
-        
-        @keyframes shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        
-        /* Skill colors */
-        .excel { background: linear-gradient(90deg, #1f7a1f, #4caf50); }
-        .powerbi { background: linear-gradient(90deg, #f9c74f, #f8961e); }
-        .sql { background: linear-gradient(90deg, #577590, #43aa8b); }
-        .python { background: linear-gradient(90deg, #f94144, #f3722c); }
-        .dataviz { background: linear-gradient(90deg, #4361ee, #3a0ca3); }
-        .ml { background: linear-gradient(90deg, #f72585, #b5179e); }
-        .stats { background: linear-gradient(90deg, #4895ef, #4cc9f0); }
-        .cloud { background: linear-gradient(90deg, #7209b7, #560bad); }
-        
-        .tools-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-        
-        .tools-container {
-            background: rgba(0, 53, 102, 0.3);
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 204, 0, 0.1);
-        }
-        
-        .tools-container h3 {
-            color: var(--accent);
-            font-size: 1.5rem;
-            margin-top: 0;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .tools-container h3 i {
-            font-size: 1.8rem;
-        }
-        
-        .tools-list {
+        ul, ol {
+            padding-left: 20px;
             list-style-type: none;
-            padding: 0;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
         }
         
-        .tools-list li {
-            padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
+        li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+        
+        a {
+            color: var(--accent);
+            text-decoration: none;
             transition: all 0.3s ease;
             position: relative;
-            padding-left: 40px;
-            border-left: 3px solid var(--secondary);
         }
         
-        .tools-list li:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
-            border-left: 3px solid var(--accent);
-        }
-        
-        .tools-list li::before {
-            content: '▹';
+        a::after {
+            content: '';
             position: absolute;
-            left: 15px;
-            color: var(--accent);
+            width: 100%;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
         
-        .chart-container {
-            background: rgba(0, 53, 102, 0.3);
-            padding: 25px;
-            border-radius: 15px;
-            margin-top: 30px;
-            border: 1px solid rgba(255, 204, 0, 0.1);
-        }
-        
-        canvas {
-            width: 100% !important;
-            height: auto !important;
+        a:hover::after {
+            transform: scaleX(1);
         }
         
         footer {
@@ -344,44 +249,15 @@
             opacity: 0.3;
         }
         
-        footer a {
-            color: var(--accent);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        footer a::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            bottom: -2px;
-            left: 0;
-            background: var(--accent);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-        
-        footer a:hover::after {
-            transform: scaleX(1);
-        }
-        
-        @media (max-width: 992px) {
-            .skills-grid, .tools-section {
-                grid-template-columns: 1fr;
-            }
-            
+        @media (max-width: 768px) {
             h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
             
             h2 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
-        }
-        
-        @media (max-width: 768px) {
+            
             nav {
                 flex-direction: column;
                 align-items: center;
@@ -403,8 +279,9 @@
     
     <div class="content-wrapper">
         <header>
-            <h1>My Data Skills</h1>
-            <p>Interactive 3D Visualization of My Technical Proficiencies</p>
+            <h1>Meraj Ahmad</h1>
+            <div class="typed-text"></div>
+            <p>Transforming Data into Strategic Insights</p>
         </header>
         
         <nav>
@@ -421,250 +298,135 @@
         </nav>
         
         <section>
-            <h2><i class="fas fa-chart-line"></i> Technical Skills Matrix</h2>
-            <div class="skills-grid">
-                <div>
-                    <div class="skill-category">
-                        <h3><i class="fas fa-file-excel"></i> Data Tools</h3>
-                        
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Microsoft Excel</span>
-                                <span class="skill-level">90%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress excel" style="width: 90%;"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Power BI</span>
-                                <span class="skill-level">85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress powerbi" style="width: 85%;"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">SQL</span>
-                                <span class="skill-level">80%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress sql" style="width: 80%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <h3><i class="fas fa-laptop-code"></i> Programming</h3>
-                        
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Python</span>
-                                <span class="skill-level">75%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress python" style="width: 75%;"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">VBA</span>
-                                <span class="skill-level">70%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress excel" style="width: 70%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div>
-                    <div class="skill-category">
-                        <h3><i class="fas fa-chart-pie"></i> Data Science</h3>
-                        
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Data Visualization</span>
-                                <span class="skill-level">85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress dataviz" style="width: 85%;"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Machine Learning</span>
-                                <span class="skill-level">65%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress ml" style="width: 65%;"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Statistics</span>
-                                <span class="skill-level">75%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress stats" style="width: 75%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <h3><i class="fas fa-cloud"></i> Cloud & Big Data</h3>
-                        
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">AWS/Azure</span>
-                                <span class="skill-level">60%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress cloud" style="width: 60%;"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Hadoop/Spark</span>
-                                <span class="skill-level">50%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress cloud" style="width: 50%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="chart-container">
-                <h3><i class="fas fa-chart-bar"></i> Skills Radar Chart</h3>
-                <canvas id="skillsRadar"></canvas>
-            </div>
+            <h2>Hi, I'm Meraj Ahmad 👋</h2>
+            <p>A passionate <strong>Senior Data Analyst & MIS Executive</strong> with expertise in data management, reporting automation, data visualization, and Python data analysis.</p>
+            <p>I turn complex data into clear, actionable insights that drive business success.</p>
+            <button id="theme-toggle"><i class="fas fa-moon"></i> Toggle Dark Mode</button>
         </section>
         
         <section>
-            <h2><i class="fas fa-tools"></i> Tools & Technologies</h2>
-            <div class="tools-section">
-                <div class="tools-container">
-                    <h3><i class="fas fa-database"></i> Data Tools</h3>
-                    <ul class="tools-list">
-                        <li>Advanced Excel (Pivot Tables, Power Query, VBA)</li>
-                        <li>Power BI (DAX, Data Modeling, Visuals)</li>
-                        <li>SQL Server, MySQL (Complex Queries)</li>
-                        <li>Tableau, Google Data Studio</li>
-                        <li>Power Query & Data Transformation</li>
-                    </ul>
-                </div>
-                
-                <div class="tools-container">
-                    <h3><i class="fas fa-code"></i> Programming</h3>
-                    <ul class="tools-list">
-                        <li>Python (Pandas, NumPy, Matplotlib)</li>
-                        <li>Machine Learning (Scikit-learn)</li>
-                        <li>Cloud Platforms (AWS, Azure)</li>
-                        <li>Big Data Tools (Hadoop, Spark)</li>
-                        <li>Git & Version Control</li>
-                    </ul>
-                </div>
-            </div>
+            <h2><i class="fas fa-star"></i> Specializations</h2>
+            <ul>
+                <li><strong>Data Analysis & Reporting</strong>: Excel, Power BI, SQL</li>
+                <li><strong>Automation & Process Optimization</strong>: VBA Macros, Power Query</li>
+                <li><strong>Data Visualization</strong>: Power BI Dashboards, Excel Charts</li>
+                <li><strong>Data Science Basics</strong>: Python (Pandas, NumPy, Matplotlib, Seaborn)</li>
+            </ul>
         </section>
         
         <section>
-            <h2><i class="fas fa-users"></i> Soft Skills</h2>
-            <div class="tools-section">
-                <div class="tools-container">
-                    <h3><i class="fas fa-brain"></i> Analytical</h3>
-                    <ul class="tools-list">
-                        <li>Data-Driven Decision Making</li>
-                        <li>Problem Solving & Critical Thinking</li>
-                        <li>Business Intelligence</li>
-                        <li>Requirements Analysis</li>
-                    </ul>
-                </div>
-                
-                <div class="tools-container">
-                    <h3><i class="fas fa-comments"></i> Interpersonal</h3>
-                    <ul class="tools-list">
-                        <li>Communication & Presentation</li>
-                        <li>Project Management</li>
-                        <li>Team Collaboration</li>
-                        <li>Stakeholder Management</li>
-                    </ul>
-                </div>
-            </div>
+            <h2><i class="fas fa-project-diagram"></i> Featured Projects</h2>
+            <ol>
+                <li><a href="projects.html#sales-dashboard"><i class="fas fa-chart-line"></i> Sales Dashboard - Excel & Power BI</a></li>
+                <li><a href="projects.html#customer-service-report"><i class="fas fa-robot"></i> Customer Service Report Automation</a></li>
+                <li><a href="projects.html#cyber-cafe-analysis"><i class="fas fa-coffee"></i> Cyber Cafe Sales Analysis - SQL & Python</a></li>
+                <li><a href="projects.html#kpi-tracker"><i class="fas fa-tachometer-alt"></i> SBI Credit Card KPI Tracker</a></li>
+                <li><a href="projects.html#retail-billing"><i class="fas fa-cash-register"></i> Retail Billing System with Automation</a></li>
+                <li><a href="projects.html#predictive-sales"><i class="fas fa-brain"></i> Predictive Sales Analysis - Python ML</a></li>
+            </ol>
+        </section>
+        
+        <section>
+            <h2><i class="fas fa-envelope"></i> Contact Me</h2>
+            <p>Let's collaborate! Feel free to reach out via <a href="contact.html">Contact Page</a> or connect on <a href="https://www.linkedin.com/in/merajai" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>.</p>
         </section>
         
         <footer>
             <p>© 2025 Meraj Ahmad | Data Analyst Portfolio | 
-               <a href="https://www.linkedin.com/in/merajai" target="_blank">LinkedIn</a> | 
-               <a href="https://github.com/MerajAI" target="_blank">GitHub</a>
+               <a href="https://www.linkedin.com/in/merajai" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a> | 
+               <a href="https://github.com/MerajAI" target="_blank"><i class="fab fa-github"></i> GitHub</a>
             </p>
         </footer>
     </div>
 
     <script>
-        // Three.js Background Animation
+        // Advanced Three.js Background
         const bgContainer = document.getElementById('threejs-bg');
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        const renderer = new THREE.WebGLRenderer({ 
+            antialias: true,
+            alpha: true
+        });
         renderer.setSize(window.innerWidth, window.innerHeight);
         bgContainer.appendChild(renderer.domElement);
         
+        // Create scene with fog
         const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x0a1128, 0.002);
+        
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.z = 30;
         
-        // Create data nodes
-        const nodes = [];
-        const nodeGeometry = new THREE.SphereGeometry(0.4, 16, 16);
+        // Create particle system
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particleCount = 2000;
         
-        // Skill colors
-        const skillColors = [
-            0x4caf50, // Excel
-            0xf9c74f, // Power BI
-            0x43aa8b, // SQL
-            0xf94144, // Python
-            0x4361ee, // Data Viz
-            0xf72585, // ML
-            0x4895ef, // Stats
-            0x7209b7  // Cloud
+        const posArray = new Float32Array(particleCount * 3);
+        const colorArray = new Float32Array(particleCount * 3);
+        const sizeArray = new Float32Array(particleCount);
+        
+        for(let i = 0; i < particleCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 200;
+            colorArray[i] = Math.random();
+            
+            if(i < particleCount) {
+                sizeArray[i] = Math.random() * 2 + 0.5;
+            }
+        }
+        
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
+        particlesGeometry.setAttribute('size', new THREE.BufferAttribute(sizeArray, 1));
+        
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 1,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending,
+            sizeAttenuation: true
+        });
+        
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+        
+        // Create data nodes with connections
+        const nodes = [];
+        const nodeGeometry = new THREE.SphereGeometry(0.8, 16, 16);
+        const nodeMaterials = [
+            new THREE.MeshBasicMaterial({ color: 0x0077b6, transparent: true, opacity: 0.9 }),
+            new THREE.MeshBasicMaterial({ color: 0xffcc00, transparent: true, opacity: 0.9 }),
+            new THREE.MeshBasicMaterial({ color: 0xff6600, transparent: true, opacity: 0.9 })
         ];
         
-        // Create skill clusters
-        for (let i = 0; i < 8; i++) {
-            const color = skillColors[i];
-            const material = new THREE.MeshBasicMaterial({ 
-                color: color,
-                transparent: true,
-                opacity: 0.8
-            });
+        // Create 3 clusters of nodes
+        for(let c = 0; c < 3; c++) {
+            const clusterCenter = new THREE.Vector3(
+                (Math.random() - 0.5) * 30,
+                (Math.random() - 0.5) * 30,
+                (Math.random() - 0.5) * 30
+            );
             
-            // Create cluster of nodes
-            for (let j = 0; j < 15; j++) {
-                const node = new THREE.Mesh(nodeGeometry, material);
+            for(let i = 0; i < 15; i++) {
+                const node = new THREE.Mesh(
+                    nodeGeometry, 
+                    nodeMaterials[c].clone()
+                );
                 
-                // Position in cluster
+                // Position nodes around cluster center
                 const angle = Math.random() * Math.PI * 2;
-                const radius = 3 + Math.random() * 2;
+                const radius = 3 + Math.random() * 5;
                 const height = (Math.random() - 0.5) * 10;
                 
-                node.position.x = Math.cos(angle) * radius + (i % 4) * 10 - 15;
-                node.position.y = Math.sin(angle) * radius + Math.floor(i / 4) * 10 - 5;
-                node.position.z = height;
+                node.position.x = clusterCenter.x + Math.cos(angle) * radius;
+                node.position.y = clusterCenter.y + Math.sin(angle) * radius;
+                node.position.z = clusterCenter.z + height;
                 
-                // Animation properties
                 node.userData = {
                     speed: 0.01 + Math.random() * 0.02,
                     angle: angle,
                     radius: radius,
-                    cluster: i
+                    cluster: c,
+                    center: clusterCenter
                 };
                 
                 scene.add(node);
@@ -677,15 +439,15 @@
         const edgeMaterial = new THREE.LineBasicMaterial({ 
             color: 0xffffff,
             transparent: true,
-            opacity: 0.1
+            opacity: 0.2
         });
         
-        for (let i = 0; i < 100; i++) {
+        for(let i = 0; i < 100; i++) {
             const node1 = nodes[Math.floor(Math.random() * nodes.length)];
             const node2 = nodes[Math.floor(Math.random() * nodes.length)];
             
             // Higher chance to connect within same cluster
-            if (node1.userData.cluster === node2.userData.cluster || Math.random() > 0.8) {
+            if(node1.userData.cluster === node2.userData.cluster || Math.random() > 0.8) {
                 const edgeGeometry = new THREE.BufferGeometry().setFromPoints([
                     node1.position,
                     node2.position
@@ -703,15 +465,15 @@
         
         // Add floating data elements
         const dataElements = [];
-        const shapes = [
-            new THREE.BoxGeometry(0.8, 0.8, 0.8),
-            new THREE.ConeGeometry(0.6, 1.5, 4),
-            new THREE.CylinderGeometry(0.5, 0.5, 1.2, 6),
-            new THREE.TorusGeometry(0.7, 0.3, 8, 16)
+        const dataShapes = [
+            new THREE.TorusGeometry(1, 0.4, 8, 16),
+            new THREE.ConeGeometry(0.8, 1.5, 4),
+            new THREE.BoxGeometry(1, 1, 1),
+            new THREE.IcosahedronGeometry(0.8, 0)
         ];
         
-        for (let i = 0; i < 20; i++) {
-            const shape = shapes[Math.floor(Math.random() * shapes.length)];
+        for(let i = 0; i < 15; i++) {
+            const shape = dataShapes[Math.floor(Math.random() * dataShapes.length)];
             const material = new THREE.MeshBasicMaterial({
                 color: 0x00ffff,
                 transparent: true,
@@ -721,9 +483,9 @@
             
             const element = new THREE.Mesh(shape, material);
             
-            element.position.x = (Math.random() - 0.5) * 40;
-            element.position.y = (Math.random() - 0.5) * 40;
-            element.position.z = (Math.random() - 0.5) * 40;
+            element.position.x = (Math.random() - 0.5) * 50;
+            element.position.y = (Math.random() - 0.5) * 50;
+            element.position.z = (Math.random() - 0.5) * 50;
             
             element.userData = {
                 speed: 0.005 + Math.random() * 0.01,
@@ -742,19 +504,23 @@
         function animate() {
             requestAnimationFrame(animate);
             
+            // Animate particles
+            const positions = particlesGeometry.attributes.position.array;
+            for(let i = 0; i < particleCount * 3; i += 3) {
+                positions[i + 1] -= 0.1;
+                if(positions[i + 1] < -100) {
+                    positions[i + 1] = 100;
+                }
+            }
+            particlesGeometry.attributes.position.needsUpdate = true;
+            
             // Animate nodes in clusters
             nodes.forEach(node => {
                 node.userData.angle += node.userData.speed;
-                const clusterCenterX = (node.userData.cluster % 4) * 10 - 15;
-                const clusterCenterY = Math.floor(node.userData.cluster / 4) * 10 - 5;
                 
-                node.position.x = Math.cos(node.userData.angle) * node.userData.radius + clusterCenterX;
-                node.position.y = Math.sin(node.userData.angle) * node.userData.radius + clusterCenterY;
-                node.position.z += (Math.random() - 0.5) * 0.1;
-                
-                // Keep z-position within bounds
-                if (node.position.z > 20) node.position.z = -20;
-                if (node.position.z < -20) node.position.z = 20;
+                node.position.x = node.userData.center.x + Math.cos(node.userData.angle) * node.userData.radius;
+                node.position.y = node.userData.center.y + Math.sin(node.userData.angle) * node.userData.radius;
+                node.position.z = node.userData.center.z + (Math.random() - 0.5) * 2;
             });
             
             // Animate data elements
@@ -764,10 +530,8 @@
                 element.rotation.z += element.userData.rotationSpeed.z;
                 
                 element.position.z += element.userData.speed;
-                if (element.position.z > 30) {
-                    element.position.z = -30;
-                    element.position.x = (Math.random() - 0.5) * 40;
-                    element.position.y = (Math.random() - 0.5) * 40;
+                if(element.position.z > 50) {
+                    element.position.z = -50;
                 }
             });
             
@@ -794,87 +558,45 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
         
-        // Skills Radar Chart
-        document.addEventListener('DOMContentLoaded', function() {
-            const ctx = document.getElementById('skillsRadar').getContext('2d');
-            const skillsRadar = new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: [
-                        'Excel', 
-                        'Power BI', 
-                        'SQL', 
-                        'Python', 
-                        'Data Viz', 
-                        'ML', 
-                        'Stats',
-                        'Cloud'
-                    ],
-                    datasets: [{
-                        label: 'Skill Level',
-                        data: [90, 85, 80, 75, 85, 65, 75, 60],
-                        backgroundColor: 'rgba(0, 119, 182, 0.5)',
-                        borderColor: '#ffcc00',
-                        borderWidth: 2,
-                        pointBackgroundColor: [
-                            '#4caf50',
-                            '#f9c74f',
-                            '#43aa8b',
-                            '#f94144',
-                            '#4361ee',
-                            '#f72585',
-                            '#4895ef',
-                            '#7209b7'
-                        ],
-                        pointRadius: 5,
-                        pointHoverRadius: 7
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        r: {
-                            angleLines: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            pointLabels: {
-                                color: 'white',
-                                font: {
-                                    size: 12
-                                }
-                            },
-                            ticks: {
-                                backdropColor: 'transparent',
-                                color: 'rgba(255, 255, 255, 0.5)',
-                                stepSize: 20
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            labels: {
-                                color: 'white',
-                                font: {
-                                    size: 14
-                                }
-                            }
-                        }
-                    }
-                }
-            });
+        // Typed.js animation
+        const typed = new Typed('.typed-text', {
+            strings: [
+                'Data Analyst',
+                'MIS Executive',
+                'Python Developer',
+                'Power BI Expert',
+                'SQL Specialist',
+                'Data Storyteller'
+            ],
+            typeSpeed: 50,
+            backSpeed: 30,
+            loop: true
+        });
+        
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
             
-            // Animate skill bars
-            const skillBars = document.querySelectorAll('.skill-progress');
-            skillBars.forEach(bar => {
-                const width = bar.style.width;
-                bar.style.width = '0';
-                setTimeout(() => {
-                    bar.style.width = width;
-                }, 100);
-            });
+            if(document.body.classList.contains('light-theme')) {
+                // Light theme colors
+                document.documentElement.style.setProperty('--primary', '#caf0f8');
+                document.documentElement.style.setProperty('--secondary', '#90e0ef');
+                document.documentElement.style.setProperty('--accent', '#0077b6');
+                document.documentElement.style.setProperty('--light-blue', '#023e8a');
+                document.documentElement.style.setProperty('--dark-blue', '#03045e');
+                document.documentElement.style.setProperty('--dark', '#ffffff');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i> Toggle Dark Mode';
+            } else {
+                // Dark theme colors
+                document.documentElement.style.setProperty('--primary', '#023e8a');
+                document.documentElement.style.setProperty('--secondary', '#0077b6');
+                document.documentElement.style.setProperty('--accent', '#ffcc00');
+                document.documentElement.style.setProperty('--light-blue', '#caf0f8');
+                document.documentElement.style.setProperty('--dark-blue', '#03045e');
+                document.documentElement.style.setProperty('--dark', '#0a1128');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i> Toggle Light Mode';
+            }
         });
     </script>
 </body>
