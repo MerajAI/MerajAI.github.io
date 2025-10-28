@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Experience - Meraj Ahmad | Data Analyst</title>
+    <title> Experience - Meraj Ahmad | Data Analyst</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         :root {
@@ -14,7 +14,7 @@
             --dark-blue: #03045e;
             --dark: #0a1128;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -24,7 +24,7 @@
             background-color: var(--dark);
             overflow-x: hidden;
         }
-        
+
         #threejs-bg {
             position: fixed;
             top: 0;
@@ -34,7 +34,7 @@
             z-index: -1;
             opacity: 0.8;
         }
-        
+
         .content-wrapper {
             position: relative;
             z-index: 1;
@@ -42,7 +42,7 @@
             margin: 0 auto;
             padding: 20px;
         }
-        
+
         header {
             background: linear-gradient(135deg, rgba(2, 62, 138, 0.9), rgba(0, 119, 182, 0.9));
             color: white;
@@ -56,7 +56,7 @@
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 204, 0, 0.2);
         }
-        
+
         header::after {
             content: '';
             position: absolute;
@@ -67,7 +67,7 @@
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.1"/></svg>');
             opacity: 0.1;
         }
-        
+
         nav {
             display: flex;
             justify-content: center;
@@ -79,7 +79,7 @@
             margin: 0 20px 40px;
             backdrop-filter: blur(5px);
         }
-        
+
         nav a {
             color: white;
             text-decoration: none;
@@ -93,18 +93,18 @@
             align-items: center;
             gap: 8px;
         }
-        
+
         nav a:hover {
             background: rgba(255, 204, 0, 0.9);
             color: var(--dark-blue);
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(255, 204, 0, 0.4);
         }
-        
+
         nav a i {
             font-size: 1.2rem;
         }
-        
+
         section {
             background: rgba(255, 255, 255, 0.12);
             padding: 40px;
@@ -116,13 +116,13 @@
             overflow: hidden;
             backdrop-filter: blur(5px);
         }
-        
+
         section:hover {
             background: rgba(255, 255, 255, 0.18);
             transform: translateY(-8px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
-        
+
         section::before {
             content: '';
             position: absolute;
@@ -132,7 +132,7 @@
             height: 100%;
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,0 L100,100 M100,0 L0,100" stroke="%23ffffff" opacity="0.03" stroke-width="1"/></svg>');
         }
-        
+
         h1 {
             font-size: 3rem;
             margin-bottom: 20px;
@@ -141,7 +141,7 @@
             -webkit-text-fill-color: transparent;
             text-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
         }
-        
+
         h2 {
             color: var(--accent);
             font-size: 2.2rem;
@@ -151,7 +151,7 @@
             display: inline-block;
             position: relative;
         }
-        
+
         h2::after {
             content: '';
             position: absolute;
@@ -161,12 +161,12 @@
             height: 3px;
             background: #ff6600;
         }
-        
+
         .timeline {
             position: relative;
             margin: 40px 0;
         }
-        
+
         .timeline::before {
             content: '';
             position: absolute;
@@ -178,12 +178,12 @@
             animation: growLine 1.5s ease forwards;
             border-radius: 2px;
         }
-        
+
         @keyframes growLine {
             from { height: 0; }
             to { height: 100%; }
         }
-        
+
         .timeline-item {
             position: relative;
             padding: 25px;
@@ -196,14 +196,14 @@
             border-left: 4px solid transparent;
             backdrop-filter: blur(5px);
         }
-        
+
         .timeline-item:hover {
             transform: translateX(10px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.3);
             border-left: 4px solid var(--accent);
             background: rgba(0, 53, 102, 0.5);
         }
-        
+
         .timeline-item::before {
             content: '';
             position: absolute;
@@ -217,44 +217,44 @@
             z-index: 1;
             box-shadow: 0 0 0 4px rgba(255, 204, 0, 0.2);
         }
-        
+
         h3 {
             color: var(--accent);
             margin-bottom: 5px;
             font-size: 1.5rem;
         }
-        
+
         h4 {
             color: var(--light-blue);
             margin-top: 0;
             margin-bottom: 15px;
             font-weight: normal;
         }
-        
+
         ul {
             padding-left: 20px;
             list-style-type: none;
         }
-        
+
         li {
             margin-bottom: 15px;
             position: relative;
             padding-left: 25px;
         }
-        
+
         li::before {
             content: '▹';
             position: absolute;
             left: 0;
             color: var(--accent);
         }
-        
+
         .project-links {
             margin-top: 20px;
             padding-top: 15px;
             border-top: 1px dashed rgba(255, 204, 0, 0.3);
         }
-        
+
         .project-links a {
             color: var(--accent);
             text-decoration: none;
@@ -266,13 +266,13 @@
             background: rgba(2, 62, 138, 0.6);
             border: 1px solid rgba(255, 204, 0, 0.3);
         }
-        
+
         .project-links a:hover {
             background: rgba(255, 204, 0, 0.9);
             color: var(--dark-blue);
             text-decoration: none;
         }
-        
+
         .quote {
             font-style: italic;
             font-size: 1.2rem;
@@ -284,7 +284,7 @@
             border-radius: 0 15px 15px 0;
             backdrop-filter: blur(5px);
         }
-        
+
         footer {
             text-align: center;
             padding: 30px;
@@ -295,7 +295,7 @@
             position: relative;
             margin: 40px 20px 0;
         }
-        
+
         footer::before {
             content: '';
             position: absolute;
@@ -306,14 +306,14 @@
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="20" viewBox="0 0 100 20"><path d="M0,10 Q25,20 50,10 T100,10" stroke="%23ffcc00" fill="none" stroke-width="0.5" opacity="0.3"/></svg>');
             opacity: 0.3;
         }
-        
+
         footer a {
             color: var(--accent);
             text-decoration: none;
             transition: all 0.3s ease;
             position: relative;
         }
-        
+
         footer a::after {
             content: '';
             position: absolute;
@@ -325,11 +325,11 @@
             transform: scaleX(0);
             transition: transform 0.3s ease;
         }
-        
+
         footer a:hover::after {
             transform: scaleX(1);
         }
-        
+
         /* Animation for timeline items */
         @keyframes fadeInUp {
             from {
@@ -341,46 +341,46 @@
                 transform: translateY(0);
             }
         }
-        
+
         .timeline-item {
             animation: fadeInUp 0.6s ease forwards;
             opacity: 0;
         }
-        
+
         .timeline-item:nth-child(1) { animation-delay: 0.2s; }
         .timeline-item:nth-child(2) { animation-delay: 0.4s; }
         .timeline-item:nth-child(3) { animation-delay: 0.6s; }
-        
+
         @media (max-width: 768px) {
             nav {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .content-wrapper {
                 padding: 10px;
             }
-            
+
             section {
                 padding: 25px;
             }
-            
+
             h1 {
                 font-size: 2.2rem;
             }
-            
+
             h2 {
                 font-size: 1.8rem;
             }
-            
+
             .timeline::before {
                 left: 15px;
             }
-            
+
             .timeline-item {
                 padding-left: 45px;
             }
-            
+
             .timeline-item::before {
                 left: 10px;
             }
@@ -390,13 +390,13 @@
 </head>
 <body>
     <div id="threejs-bg"></div>
-    
+
     <div class="content-wrapper">
         <header>
             <h1>Professional Experience</h1>
-            <p>Interactive 3D Timeline of My Career Journey</p>
+            <p> Timeline of My Career Journey</p>
         </header>
-        
+
         <nav>
             <a href="index.html"><i class="fas fa-home"></i> Home</a>
             <a href="about.html"><i class="fas fa-user"></i> About</a>
@@ -409,14 +409,14 @@
             <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
             <a href="resume.html"><i class="fas fa-file-alt"></i> Resume</a>
         </nav>
-        
+
         <section>
             <h2><i class="fas fa-history"></i> Career Timeline</h2>
             <div class="timeline">
 
                 <div class="timeline-item">
                     <h3>Teleperformance Global Business Pvt.Ltd</h3>
-                    <h4>Customer Service Associate | Aug 2023 - May 2024</h4>
+                    <h4>Customer Service Associate | Jun 2023 - Jan 2024</h4>
                     <ul>
                         <li>Managed 50+ daily customer interactions for SBI Credit Card operations, maintaining 95% satisfaction rate</li>
                         <li>Prepared detailed MIS reports analyzing team performance metrics, reducing reporting time by 30%</li>
@@ -427,7 +427,7 @@
 
                 <div class="timeline-item">
                     <h3>Home Credit India Finance Pvt. Ltd</h3>
-                    <h4>Associate - MIS & Reporting | Jul 2024 - Mar 2025</h4>
+                    <h4>Associate - MIS & Reporting | Feb 2024 - Oct 2025</h4>
                     <ul>
                         <li>Automated daily sales reporting using Excel macros, saving 10+ hours weekly</li>
                         <li>Created SQL queries to analyze customer transaction patterns, identifying upsell opportunities</li>
@@ -443,28 +443,28 @@
                         <li>Built 20+ interactive Power BI dashboards for clients across retail and service industries</li>
                         <li>Developed Python automation scripts (Pandas, NumPy) that reduced data processing time by 75%</li>
                         <li>Created predictive models for sales forecasting with 85% accuracy rate</li>
-                        <li class="project-links"><strong>Project Links:</strong> 
-                            <a href="https://github.com/yourprofile" target="_blank"><i class="fab fa-github"></i> GitHub</a> | 
-                            <a href="https://yourportfolio.com" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        <li class="     project-links"><strong>Project Links:</strong>
+                            <a href="   https://github.com/yourprofile" target="_blank"><i class="fab fa-github"></i> GitHub</a> |
+                            <a href="   https://yourportfolio.com " target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
                         </li>
                     </ul>
                 </div>
 
             </div>
         </section>
-        
+
         <section>
             <h2><i class="fas fa-lightbulb"></i> Work Philosophy</h2>
             <div class="quote">
-                "Every data point tells a story. I specialize in uncovering these narratives, transforming complex information into clear insights, 
+                "Every data point tells a story. I specialize in uncovering these narratives, transforming complex information into clear insights,
                 and using data-driven strategies to create measurable business impact."
             </div>
         </section>
-        
+
         <footer>
-            <p>© 2025 Meraj Ahmad | Data Analyst Portfolio | 
-               <a href="https://www.linkedin.com/in/merajai" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a> | 
-               <a href="https://github.com/MerajAI" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            <p>© 2025 Meraj Ahmad | Data Analyst Portfolio |
+               <a href="   https://www.linkedin.com/in/merajai" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a> |
+               <a href="   https://github.com/MerajAI" target="_blank"><i class="fab fa-github"></i> GitHub</a>
             </p>
         </footer>
     </div>
@@ -475,44 +475,44 @@
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         bgContainer.appendChild(renderer.domElement);
-        
+
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.z = 30;
-        
+
         // Create timeline nodes
         const nodes = [];
         const nodeGeometry = new THREE.SphereGeometry(0.4, 16, 16);
-        
+
         // Experience colors
         const expColors = [
             0x4caf50, // Teleperformance
             0xf9c74f, // Home Credit
             0x43aa8b  // Freelance
         ];
-        
+
         // Create experience clusters
         for (let i = 0; i < 3; i++) {
             const color = expColors[i];
-            const material = new THREE.MeshBasicMaterial({ 
+            const material = new THREE.MeshBasicMaterial({
                 color: color,
                 transparent: true,
                 opacity: 0.8
             });
-            
+
             // Create cluster of nodes
             for (let j = 0; j < 10; j++) {
                 const node = new THREE.Mesh(nodeGeometry, material);
-                
+
                 // Position in cluster
                 const angle = Math.random() * Math.PI * 2;
                 const radius = 3 + Math.random() * 2;
                 const height = (Math.random() - 0.5) * 10;
-                
+
                 node.position.x = Math.cos(angle) * radius + (i % 3) * 10 - 10;
                 node.position.y = Math.sin(angle) * radius + (i % 2) * 10 - 5;
                 node.position.z = height;
-                
+
                 // Animation properties
                 node.userData = {
                     speed: 0.01 + Math.random() * 0.02,
@@ -520,31 +520,31 @@
                     radius: radius,
                     cluster: i
                 };
-                
+
                 scene.add(node);
                 nodes.push(node);
             }
         }
-        
+
         // Create connections between nodes
         const edges = [];
-        const edgeMaterial = new THREE.LineBasicMaterial({ 
+        const edgeMaterial = new THREE.LineBasicMaterial({
             color: 0xffffff,
             transparent: true,
             opacity: 0.1
         });
-        
+
         for (let i = 0; i < 50; i++) {
             const node1 = nodes[Math.floor(Math.random() * nodes.length)];
             const node2 = nodes[Math.floor(Math.random() * nodes.length)];
-            
+
             // Higher chance to connect within same cluster
             if (node1.userData.cluster === node2.userData.cluster || Math.random() > 0.8) {
                 const edgeGeometry = new THREE.BufferGeometry().setFromPoints([
                     node1.position,
                     node2.position
                 ]);
-                
+
                 const edge = new THREE.Line(edgeGeometry, edgeMaterial);
                 scene.add(edge);
                 edges.push({
@@ -554,14 +554,14 @@
                 });
             }
         }
-        
+
         // Add floating document elements
         const docElements = [];
         const docShapes = [
             new THREE.BoxGeometry(1.5, 2, 0.2),
             new THREE.PlaneGeometry(1.8, 2.5)
         ];
-        
+
         for (let i = 0; i < 10; i++) {
             const shape = docShapes[Math.floor(Math.random() * docShapes.length)];
             const material = new THREE.MeshBasicMaterial({
@@ -570,13 +570,13 @@
                 opacity: 0.3,
                 wireframe: true
             });
-            
+
             const element = new THREE.Mesh(shape, material);
-            
+
             element.position.x = (Math.random() - 0.5) * 40;
             element.position.y = (Math.random() - 0.5) * 40;
             element.position.z = (Math.random() - 0.5) * 40;
-            
+
             element.userData = {
                 speed: 0.003 + Math.random() * 0.007,
                 rotationSpeed: new THREE.Vector3(
@@ -585,36 +585,36 @@
                     Math.random() * 0.005
                 )
             };
-            
+
             scene.add(element);
             docElements.push(element);
         }
-        
+
         // Animation loop
         function animate() {
             requestAnimationFrame(animate);
-            
+
             // Animate nodes in clusters
             nodes.forEach(node => {
                 node.userData.angle += node.userData.speed;
                 const clusterCenterX = (node.userData.cluster % 3) * 10 - 10;
                 const clusterCenterY = (node.userData.cluster % 2) * 10 - 5;
-                
+
                 node.position.x = Math.cos(node.userData.angle) * node.userData.radius + clusterCenterX;
                 node.position.y = Math.sin(node.userData.angle) * node.userData.radius + clusterCenterY;
                 node.position.z += (Math.random() - 0.5) * 0.1;
-                
+
                 // Keep z-position within bounds
                 if (node.position.z > 20) node.position.z = -20;
                 if (node.position.z < -20) node.position.z = 20;
             });
-            
+
             // Animate document elements
             docElements.forEach(element => {
                 element.rotation.x += element.userData.rotationSpeed.x;
                 element.rotation.y += element.userData.rotationSpeed.y;
                 element.rotation.z += element.userData.rotationSpeed.z;
-                
+
                 element.position.z += element.userData.speed;
                 if (element.position.z > 30) {
                     element.position.z = -30;
@@ -622,7 +622,7 @@
                     element.position.y = (Math.random() - 0.5) * 40;
                 }
             });
-            
+
             // Update edges
             edges.forEach(edge => {
                 const positions = edge.line.geometry.attributes.position;
@@ -630,15 +630,15 @@
                 positions.setXYZ(1, edge.node2.position.x, edge.node2.position.y, edge.node2.position.z);
                 positions.needsUpdate = true;
             });
-            
+
             // Slowly rotate the entire scene
             scene.rotation.y += 0.0005;
-            
+
             renderer.render(scene, camera);
         }
-        
+
         animate();
-        
+
         // Handle window resize
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
@@ -648,3 +648,4 @@
     </script>
 </body>
 </html>
+
